@@ -7,6 +7,7 @@ ARG ARCH=arm64
 ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
 ENV URL https://www.urbackup.org/downloads/Server/${VERSION}/${FILE}
 
+COPY qemu-aarch64-static /usr/bin/
 ADD ${URL} /root/${FILE}
 
 RUN apt-get update \
