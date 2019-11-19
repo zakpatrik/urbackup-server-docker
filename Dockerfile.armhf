@@ -9,7 +9,7 @@ ENV URL https://www.urbackup.org/downloads/Server/${VERSION}/${FILE}
 
 ADD ${URL} /root/${FILE}
 
-COPY qemu-aarch64-static /usr/bin/
+COPY qemu-arm-static /usr/bin/
 RUN apt-get update \
 	&& echo "/var/urbackup" | apt-get install -y /root/${FILE} \
 	&& rm /root/${FILE} && apt-get clean && rm -rf /var/lib/apt/lists/*
