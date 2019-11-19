@@ -1,7 +1,7 @@
 FROM debian:stable
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG VERSION=2.2.11
+ARG VERSION=2.4.11
 ENV VERSION ${VERSION}
 ARG ARCH=amd64
 ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
