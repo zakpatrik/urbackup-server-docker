@@ -18,6 +18,6 @@ EXPOSE 55414
 EXPOSE 55415
 EXPOSE 35623/udp
 
-VOLUME [ "/var/urbackup", "/var/log", "/usr/share/urbackup" ]
+VOLUME [ "/var/urbackup", "/var/log" ]
 ENTRYPOINT ["/usr/bin/urbackupsrv"]
 CMD ["run"]
