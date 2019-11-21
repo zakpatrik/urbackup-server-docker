@@ -24,5 +24,5 @@ EXPOSE 55415
 EXPOSE 35623/udp
 
 VOLUME [ "/var/urbackup", "/var/log" ]
-ENTRYPOINT ["/usr/bin/start"]
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 CMD ["run"]
