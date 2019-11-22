@@ -1,18 +1,18 @@
-Multiarch (amd64/armhf/aarch64) docker images for UrBackup server.
+## Multiarch (amd64/armhf/aarch64) docker images for UrBackup server.
 Pulling the :latest tag should automatically grab the right image for your arch.
 
-Most of the original code is based on the image by Whatang (https://github.com/Whatang/docker_urbackup)
+Most of the original code is based on the image by [Whatang](https://github.com/Whatang/docker_urbackup)
 
 
-# Running
+## Running
 
 If you want to use docker run command:
 
-docker run -d --name urbackup -v /path/to/your/backup/folder:/media/BACKUP/urbackup -v /path/to/your/database/folder:/var/urbackup -p 55413-55415:55413-55415 -p 35623:35623/udp morlan/urbackup_docker:latest
+`docker run -d --name urbackup -v /path/to/your/backup/folder:/media/BACKUP/urbackup -v /path/to/your/database/folder:/var/urbackup -p 55413-55415:55413-55415 -p 35623:35623/udp morlan/urbackup_docker:latest`
 
 Or via docker-compose: 
 docker-compose.yml
-
+```
 version: '2'
 
 services:
@@ -30,6 +30,6 @@ services:
                         - /path/to/your/backup/folder:/media/BACKUP/urbackup
                 # Activate privileged mode for BTRFS support
 		#privileged: true
-              
+```              
 	     
-After running the container, Urbackup should be reachable on the web interface on port :55414	     
+After running the container Urbackup should be reachable on the web interface on port :55414	     
