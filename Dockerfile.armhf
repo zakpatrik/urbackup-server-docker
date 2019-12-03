@@ -12,6 +12,7 @@ COPY qemu-arm-static /usr/bin/
 ADD ${URL} /root/${FILE}
 
 RUN apt-get update \
+        && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
 	&& echo "/var/urbackup" | apt-get install -y /root/${FILE} \
 	&& rm /root/${FILE} && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -23,6 +24,6 @@ EXPOSE 55414
 EXPOSE 55415
 EXPOSE 35623/udp
 
-VOLUME [ "/var/urbackup", "/var/log" ]
+VOLUME [ "/var/urbackup", "/var/log", "/backups" ]
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 CMD ["run"]
