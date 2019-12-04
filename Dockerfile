@@ -13,6 +13,7 @@ RUN apt-get update \
 	&& echo "/var/urbackup" | apt-get install -y /root/${FILE} \
 	&& rm /root/${FILE} && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir /web-backup && cp -R /usr/share/urbackup/* /web-backup
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
