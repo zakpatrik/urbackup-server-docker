@@ -29,7 +29,8 @@ services:
                 volumes:
                         - /path/to/your/database/folder:/var/urbackup
                         - /path/to/your/backup/folder:/media/BACKUP/urbackup
-                # Activate privileged mode for BTRFS support
+               network_mode: "host"
+	       # Activate privileged mode for BTRFS support
 		#privileged: true
 ```              
 	     
