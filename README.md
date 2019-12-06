@@ -8,7 +8,7 @@ Most of the original code is based on the image by [Whatang](https://github.com/
 
 If you want to use docker run command:
 
-`docker run -d --name urbackup -v /path/to/your/backup/folder:/media/BACKUP/urbackup -v /path/to/your/database/folder:/var/urbackup -p 55413-55415:55413-55415 -p 35623:35623/udp morlan/urbackup_docker:latest`
+`docker run -d --name urbackup -v /path/to/your/backup/folder:/media/BACKUP/urbackup -v /path/to/your/database/folder:/var/urbackup --network host morlan/urbackup_docker:latest`
 
 Or via docker-compose: 
 
