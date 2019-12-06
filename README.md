@@ -21,11 +21,6 @@ services:
                 image: morlan/urbackup_docker:latest
                 container_name: urbackup
                 restart: unless-stopped
-                ports:
-                        - 55413:55413
-                        - 55414:55414
-                        - 55415:55415
-                        - 35623:35623/udp
                 volumes:
                         - /path/to/your/database/folder:/var/urbackup
                         - /path/to/your/backup/folder:/media/BACKUP/urbackup
