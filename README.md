@@ -26,7 +26,7 @@ services:
                         - /path/to/your/backup/folder:/media/BACKUP/urbackup
                network_mode: "host"
 	       # Activate privileged mode for BTRFS support
-		#privileged: true
+	       #privileged: true
 ```              
 	     
 After running the container Urbackup should be reachable on the web interface on port :55414	     
