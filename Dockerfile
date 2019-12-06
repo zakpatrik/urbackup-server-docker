@@ -10,8 +10,11 @@ ENV URL https://www.urbackup.org/downloads/Server/${VERSION}/${FILE}
 ADD ${URL} /root/${FILE}
 
 RUN apt-get update \
-	&& echo "/var/urbackup" | apt-get install -y /root/${FILE} \
-	&& rm /root/${FILE} && apt-get clean && rm -rf /var/lib/apt/lists/*
+        && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
+        && echo "/var/urbackup" | apt-get install -y /root/${FILE} \
+        && rm /root/${FILE} \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /web-backup && cp -R /usr/share/urbackup/* /web-backup
 COPY entrypoint.sh /usr/bin/entrypoint.sh
@@ -22,6 +25,6 @@ EXPOSE 55414
 EXPOSE 55415
 EXPOSE 35623/udp
 
-VOLUME [ "/var/urbackup", "/var/log" ]
+VOLUME [ "/var/urbackup", "/var/log", "/backups" ]
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 CMD ["run"]
