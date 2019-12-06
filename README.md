@@ -23,7 +23,7 @@ services:
                 restart: unless-stopped
                 volumes:
                         - /path/to/your/database/folder:/var/urbackup
-                        - /path/to/your/backup/folder:/media/BACKUP/urbackup
+                        - /path/to/your/backup/folder:/backups
                network_mode: "host"
 	       # Activate privileged mode for BTRFS support
 	       #privileged: true
