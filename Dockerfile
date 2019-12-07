@@ -12,7 +12,7 @@ COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
 ADD ${URL} /root/${FILE}
 
 RUN apt-get update \
-        && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
+       # && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
         && echo "/var/urbackup" | apt-get install -y /root/${FILE} \
         && rm /root/${FILE} \
         && apt-get clean \
