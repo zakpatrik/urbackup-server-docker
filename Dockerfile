@@ -1,5 +1,5 @@
 ARG IMAGE_ARCH=debian:stretch
-FROM ${IMAGE_ARCH}
+FROM arm32v7/debian:stretch
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG VERSION=2.4.11
