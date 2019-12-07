@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-ARCH=${1:-armhf}
+ARCH=${1:-amd64}
 VERSION=${2:-2.4.11}
 TAG_VERSION=${3:-${VERSION}}
 
