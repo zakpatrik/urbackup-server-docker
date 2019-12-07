@@ -5,10 +5,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG VERSION=2.4.11
 ENV VERSION ${VERSION}
 ARG ARCH=amd64
+ARG QEMU_ARCH
 ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
 ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE}
 
-COPY qemu-${QEMU_ARCH}-static /usr/bin/
+COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
 ADD ${URL} /root/${FILE}
 
 RUN apt-get update \
@@ -19,7 +20,6 @@ RUN apt-get update \
         && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /web-backup && cp -R /usr/share/urbackup/* /web-backup
-COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
 EXPOSE 55413
