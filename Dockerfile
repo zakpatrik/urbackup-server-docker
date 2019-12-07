@@ -8,17 +8,18 @@ ARG ARCH=amd64
 ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
 ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE}
 
-COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
+COPY qemu-${QEMU_ARCH}-static /usr/bin/
 ADD ${URL} /root/${FILE}
 
 RUN apt-get update \
-       # && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
+        && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
         && echo "/var/urbackup" | apt-get install -y /root/${FILE} \
         && rm /root/${FILE} \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /web-backup && cp -R /usr/share/urbackup/* /web-backup
+COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 
 EXPOSE 55413
