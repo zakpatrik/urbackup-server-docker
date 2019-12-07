@@ -1,4 +1,4 @@
-ARG IMAGE_ARCH=debian:stable
+ARG IMAGE_ARCH=debian:stretch
 FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
