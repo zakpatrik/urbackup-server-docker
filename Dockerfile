@@ -10,7 +10,6 @@ ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE}
 
 COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
 ADD ${URL} /root/${FILE}
-RUN ls -la /root/
 
 RUN apt-get update \
         && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
