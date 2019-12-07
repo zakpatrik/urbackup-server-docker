@@ -5,7 +5,7 @@ ARG VERSION=2.4.11
 ENV VERSION ${VERSION}
 ARG ARCH=amd64
 ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
-ENV URL https://www.urbackup.org/downloads/Server/${VERSION}/${FILE}
+ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE}
 
 ADD ${URL} /root/${FILE}
 
