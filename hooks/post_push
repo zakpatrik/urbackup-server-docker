@@ -11,7 +11,7 @@ manifests:
     platform:
       architecture: arm
       os: linux
-  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):aarch64
+  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):arm64
     platform:
       architecture: arm64
       os: linux
