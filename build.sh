@@ -8,6 +8,6 @@ TAG_VERSION=${3:-${VERSION}}
 docker build \
               --build-arg ARCH=${ARCH} \
               --build-arg VERSION=${VERSION} \
-              --build-arg IMAGE_ARCH=$([ "${BUILD_ARCH}" == "armhf" ] && echo "arm32v7/debian:stretch" || ([ "${BUILD_ARCH}" == "aarch64" ] && echo "arm64v8/debian:stretch") || echo "debian:stretch") \
+              --build-arg IMAGE_ARCH=$([ "${ARCH}" == "armhf" ] && echo "arm32v7/debian:stretch" || ([ "${ARCH}" == "aarch64" ] && echo "arm64v8/debian:stretch") || echo "debian:stretch") \
               -t docker_urbackup:${ARCH}-${TAG_VERSION} \
               .
