@@ -12,8 +12,8 @@ If you want to use docker run command:
 docker run -d \
                 --name urbackup \
 		--restart unless-stopped \
-		-e PUID=1000 #Please enter the UID of the user who should own the files here
-		-e PGID=100  #Please enter the GID of the user who should own the files here
+		-e PUID=1000 #Please enter the UID of the user who should own the files here \
+		-e PGID=100  #Please enter the GID of the user who should own the files here \
 		-v /path/to/your/backup/folder:/backups \
 		-v /path/to/your/database/folder:/var/urbackup \
 		--network host \
