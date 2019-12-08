@@ -12,13 +12,13 @@ For `PGID` and `PUID` please enter the UID/GID of the user who should own the fi
 ```
 docker run -d \
                 --name urbackup \
-		--restart unless-stopped \
-		-e PUID=1000 \  
-		-e PGID=100  \ 
-		-v /path/to/your/backup/folder:/backups \
-		-v /path/to/your/database/folder:/var/urbackup \
-		--network host \
-		morlan/urbackup_docker:latest
+                --restart unless-stopped \
+                -e PUID=1000 \  
+                -e PGID=100  \ 
+                -v /path/to/your/backup/folder:/backups \
+                -v /path/to/your/database/folder:/var/urbackup \
+                --network host \
+                morlan/urbackup_docker:latest
 ```
 
 For BTRFS-Support add `--privileged` to the command above
