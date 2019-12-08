@@ -6,24 +6,26 @@ Most of the original code is based on the image by [Whatang](https://github.com/
 
 ## Running
 
-If you want to use docker run command:
+### If you want to use docker run command:
+For `PGID` and `PUID` please enter the UID/GID of the user who should own the files outside the container.
 
 ```
 docker run -d \
                 --name urbackup \
 		--restart unless-stopped \
-		-e PUID=1000 #Please enter the UID of the user who should own the files here \
-		-e PGID=100  #Please enter the GID of the user who should own the files here \
+		-e PUID=1000 \  
+		-e PGID=100  \ 
 		-v /path/to/your/backup/folder:/backups \
 		-v /path/to/your/database/folder:/var/urbackup \
 		--network host \
 		morlan/urbackup_docker:latest
 ```
+
 For BTRFS-Support add `--privileged` to the command above
 
 If you want to externally bind-mount the www-folder add `-v /path/to/wwwfolder:/usr/share/urbackup`
 
-Or via docker-compose (compatible with stacks in Portainer): 
+### Or via docker-compose (compatible with stacks in Portainer): 
 
 `docker-compose.yml`
 ```
