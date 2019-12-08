@@ -32,21 +32,21 @@ If you want to externally bind-mount the www-folder add `-v /path/to/wwwfolder:/
 version: '2'
 
 services:
-        urbackup:
-                image: morlan/urbackup_docker:latest
-                container_name: urbackup
-                restart: unless-stopped
-                environment:
-		        - PUID=1000 #Please enter the UID of the user who should own the files here
-			- PGID=100  #Please enter the GID of the user who should own the files here
-		volumes:
-                        - /path/to/your/database/folder:/var/urbackup
-                        - /path/to/your/backup/folder:/backups
-			# Uncomment the next line if you want to bind-mount the www-folder
-			#- /path/to/your/database/folder:/var/urbackup
-               network_mode: "host"
-	       # Activate privileged mode for BTRFS support
-	       #privileged: true
+  urbackup:
+    image: morlan/urbackup_docker:latest
+    container_name: urbackup
+    restart: unless-stopped
+    environment:
+      - PUID=1000 #Please enter the UID of the user who should own the files here
+      - PGID=100  #Please enter the GID of the user who should own the files here
+    volumes:
+      - /path/to/your/database/folder:/var/urbackup
+      - /path/to/your/backup/folder:/backups
+      # Uncomment the next line if you want to bind-mount the www-folder
+      #- /path/to/your/database/folder:/var/urbackup
+    network_mode: "host"
+    # Activate privileged mode for BTRFS support
+    #privileged: true
 ```              
 	     
 After running the container Urbackup should be reachable on the web interface on port :55414	     
