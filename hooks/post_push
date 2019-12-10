@@ -24,7 +24,7 @@ manifests:
       os: linux
   - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER}_i386
     platform:
-      architecture: i386
+      architecture: 386
       os: linux
   - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER}_armhf
     platform:
