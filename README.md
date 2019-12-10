@@ -21,7 +21,7 @@ docker run -d \
                 morlan/urbackup_docker:latest
 ```
 
-For BTRFS-Support add `--privileged` to the command above
+For BTRFS-Support add `--cap-add SYS_ADMIN` to the command above
 
 If you want to externally bind-mount the www-folder add `-v /path/to/wwwfolder:/usr/share/urbackup`
 
@@ -45,8 +45,10 @@ services:
       # Uncomment the next line if you want to bind-mount the www-folder
       #- /path/to/wwwfolder:/usr/share/urbackup
     network_mode: "host"
-    # Activate privileged mode for BTRFS support
-    #privileged: true
+    # Activate the following two lines for BTRFS support
+    #cap_add:
+    #  - SYS_ADMIN   
+  
 ```              
 	     
 After running the container Urbackup should be reachable on the web interface on port :55414	     
