@@ -1,5 +1,5 @@
 ## Multiarch (amd64/armhf/arm64(aarch64)) docker images for UrBackup server.
-Pulling the `:latest tag` should automatically grab the right image for your arch.
+Pulling the `:latest` tag should automatically grab the right image for your arch.
 
 Most of the original code is based on the image by [Whatang](https://github.com/Whatang/docker_urbackup)
 
