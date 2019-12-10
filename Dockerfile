@@ -6,9 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG VERSION=2.4.11
 ENV VERSION ${VERSION}
 ARG ARCH=amd64
+ARG FILE_SUBDIR=/
 ARG QEMU_ARCH
 ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
-ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE}
+ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE_SUBDIR}${FILE}
 
 # Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
 COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
