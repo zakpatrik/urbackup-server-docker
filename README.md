@@ -14,7 +14,8 @@ docker run -d \
                 --name urbackup \
                 --restart unless-stopped \
                 -e PUID=1000 \  
-                -e PGID=100  \ 
+                -e PGID=100  \
+                -e TZ=Europe/Berlin \
                 -v /path/to/your/backup/folder:/backups \
                 -v /path/to/your/database/folder:/var/urbackup \
                 --network host \
@@ -37,8 +38,9 @@ services:
     container_name: urbackup
     restart: unless-stopped
     environment:
-      - PUID=1000 #Please enter the UID of the user who should own the files here
-      - PGID=100  #Please enter the GID of the user who should own the files here
+      - PUID=1000 # Enter the UID of the user who should own the files here
+      - PGID=100  # Enter the GID of the user who should own the files here
+      - TZ=Europe/Berlin # Enter your timezone
     volumes:
       - /path/to/your/database/folder:/var/urbackup
       - /path/to/your/backup/folder:/backups
