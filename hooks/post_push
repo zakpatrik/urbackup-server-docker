@@ -1,17 +1,36 @@
 #!/bin/bash
+
+set -e
+
 echo "Creating multi-arch-manifest.yaml"
+
+BUILD_ARCH=${DOCKER_TAG}
+IMAGE_VER=${DOCKER_TAG}
+
+if [[ $BUILD_ARCH == *"_"* ]]
+then
+    BUILD_ARCH=$(echo "$BUILD_ARCH" | cut -d_ -f2)
+	IMAGE_VER=$(echo "$IMAGE_VER" | cut -d_ -f1)
+else
+    BUILD_ARCH="amd64"
+fi
+
 cat > multi-arch-manifest.yaml << EOF
 image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):latest 
 manifests:
-  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):amd64
+  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER}_amd64
     platform:
       architecture: amd64
       os: linux
-  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):armhf
+  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER}_i386
+    platform:
+      architecture: i386
+      os: linux
+  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER}_armhf
     platform:
       architecture: arm
       os: linux
-  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):arm64
+  - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER}_arm64
     platform:
       architecture: arm64
       os: linux

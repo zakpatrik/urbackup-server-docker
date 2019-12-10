@@ -2,6 +2,13 @@
 
 BUILD_ARCH=${DOCKER_TAG}
 
+if [[ $BUILD_ARCH == *"_"* ]]
+then
+    BUILD_ARCH=$(echo "$BUILD_ARCH" | cut -d_ -f2)
+else
+    BUILD_ARCH="amd64"
+fi
+
 [ "${BUILD_ARCH}" == "amd64" ] && 
 { echo 'qemu-user-static: Download not required for current arch'; exit 0; }
 
