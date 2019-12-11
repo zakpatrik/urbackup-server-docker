@@ -17,7 +17,7 @@ ADD ${URL} /root/${FILE}
 # Install UrBackup-server
 RUN apt-get update \
         && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
-        && echo "/var/urbackup" | apt-get install -y --no-install-recommends /root/${FILE} \
+        && echo "/var/urbackup" | apt-get install -y --no-install-recommends /root/${FILE} btrfs-tools \
         && rm /root/${FILE} \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
