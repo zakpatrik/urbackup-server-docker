@@ -60,7 +60,7 @@ Please use the provided `build.sh` script:
 ```
 ./build.sh
 ```
-On default the script will build a container for amd64 with version 2.4.11.
+On default the script will build a container for amd64.
 
 To build for other architectures the script accepts following argument:
 `./build.sh [ARCH] [VERSION]`

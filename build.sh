@@ -3,7 +3,7 @@ set -x
 
 # Accepted values for ARCH are amd64, armhf, arm64
 ARCH=${1:-amd64}
-VERSION=${2:-2.4.11}
+VERSION=${2:-2.4.12}
 
 docker build \
               --build-arg ARCH=${ARCH} \
