@@ -16,7 +16,7 @@ else
 fi
 
 cat > multi-arch-manifest.yaml << EOF
-image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):latest 
+image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER} 
 manifests:
   - image: $(echo "${DOCKER_REPO}" | cut -d/ -f2,3):${IMAGE_VER}_amd64
     platform:
