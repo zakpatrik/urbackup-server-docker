@@ -65,7 +65,7 @@ On default the script will build a container for amd64 with the most recent stab
 To build for other architectures the script accepts following argument:
 `./build.sh [ARCH] [VERSION]`
 
-`[ARCH]` can be `amd64`, `armhf` or `arm64`; `[Version]` can be an existing version of UrBackup-server
+`[ARCH]` can be `amd64`, `i386`, `armhf` or `arm64`; `[Version]` can be an existing version of UrBackup-server
 
 For example if you want to build an image for version 2.4.10 on armhf use the following command:
 ```
