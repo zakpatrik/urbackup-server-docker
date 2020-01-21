@@ -19,7 +19,7 @@ docker run -d \
                 -v /path/to/your/backup/folder:/backups \
                 -v /path/to/your/database/folder:/var/urbackup \
                 --network host \
-                uroni/urbackup-server-multiarch:latest
+                uroni/urbackup-server:latest
 ```
 
 For BTRFS-Support add `--cap-add SYS_ADMIN` to the command above
@@ -34,7 +34,7 @@ version: '2'
 
 services:
   urbackup:
-    image: uroni/urbackup-server-multiarch:latest
+    image: uroni/urbackup-server:latest
     container_name: urbackup
     restart: unless-stopped
     environment:
