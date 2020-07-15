@@ -8,10 +8,14 @@ echo "/backups" > /var/urbackup/backupfolder
 if [[ $PUID != "" ]]
 then
 	usermod -u $PUID -o urbackup
+else
+	usermod -u 101 -o urbackup
 fi
 if [[ $PGID != "" ]]
 then
 	groupmod -g $PGID -o urbackup
+else
+	groupmod -g 101 -o urbackup
 fi
 chown urbackup:urbackup /backups
 chown urbackup:urbackup /var/urbackup
