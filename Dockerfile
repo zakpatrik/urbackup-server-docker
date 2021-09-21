@@ -7,6 +7,8 @@ ARG VERSION=2.4.13
 ENV VERSION ${VERSION}
 ARG TARGETPLATFORM
 
+COPY entrypoint.sh /usr/bin/
+
 RUN case ${TARGETPLATFORM} in \
          "linux/amd64")  URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_amd64.deb  ;; \
          "linux/arm64")  URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_arm64.deb  ;; \
