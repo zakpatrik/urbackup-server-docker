@@ -14,7 +14,7 @@ RUN case ${TARGETPLATFORM} in \
          "linux/386")    URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_i386.deb   ;; \
     esac \
         && wget -q "$URL" -O /root/urbackup-server.deb \
-        && apt-get update  && \
+        && apt-get update \
         && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
         && apt-get install -y --no-install-recommends /root/urbackup-server.deb btrfs-tools \
         && rm /root/urbackup-server.deb \
