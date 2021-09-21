@@ -12,7 +12,7 @@ COPY entrypoint.sh /usr/bin/
 RUN case ${TARGETPLATFORM} in \
          "linux/amd64")  URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_amd64.deb  ;; \
          "linux/arm64")  URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_arm64.deb  ;; \
-         "linux/armhf") URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_armhf.deb  ;; \
+         "linux/arm/v7") URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_armhf.deb  ;; \
          "linux/386")    URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_i386.deb   ;; \
     esac \
         && apt-get update \
