@@ -5,21 +5,19 @@ FROM ${IMAGE_ARCH}
 ENV DEBIAN_FRONTEND=noninteractive
 ARG VERSION=2.4.13
 ENV VERSION ${VERSION}
-ARG ARCH=amd64
-ARG FILE_SUBDIR=/
-ARG QEMU_ARCH
-ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
-ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE_SUBDIR}${FILE}
+ARG TARGETPLATFORM
 
-# Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
-COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
-ADD ${URL} /root/${FILE}
-
-# Install UrBackup-server
-RUN apt-get update \
+RUN case ${TARGETPLATFORM} in \
+         "linux/amd64")  URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_amd64.deb  ;; \
+         "linux/arm64")  URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_arm64.deb  ;; \
+         "linux/armhf") URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_armhf.deb  ;; \
+         "linux/386")    URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_i386.deb   ;; \
+    esac \
+        && wget -q "$URL" -O /root/urbackup-server.deb \
+        && apt-get update  && \
         && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
-        && apt-get install -y --no-install-recommends /root/${FILE} btrfs-tools \
-        && rm /root/${FILE} \
+        && apt-get install -y --no-install-recommends /root/urbackup-server.deb btrfs-tools \
+        && rm /root/urbackup-server.deb \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
