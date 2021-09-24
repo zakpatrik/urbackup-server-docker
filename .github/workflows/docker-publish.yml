@@ -1,8 +1,6 @@
 name: Docker
 
 on:
-  schedule:
-    - cron: '34 5 * * *'
   push:
     branches:
       - 'master'
