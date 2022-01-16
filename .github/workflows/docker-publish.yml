@@ -15,6 +15,11 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
+        name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -33,4 +38,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/i386,linux/armhf
           push: true
-          tags: uroni/urbackup-server:latest
+          tags: uroni/urbackup-server:${{ steps.extract_branch.outputs.branch }}
