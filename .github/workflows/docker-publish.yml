@@ -3,7 +3,7 @@ name: Docker
 on:
   push:
     branches:
-      - 'master'
+      - 'latest'
       - '2.4.x'
   workflow_dispatch:
   
