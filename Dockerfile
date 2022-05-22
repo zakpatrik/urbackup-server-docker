@@ -1,12 +1,12 @@
 # Base image can be specified by --build-arg IMAGE_ARCH= ; defaults to debian:bullseye
-ARG IMAGE_ARCH=debian:bullseye
+ARG DEBIAN=bullseye
+ARG IMAGE_ARCH=debian:${DEBIAN}
 FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG VERSION=2.4.15
 ENV VERSION ${VERSION}
 ARG TARGETPLATFORM
-ARG DEBIAN=bullseye
 ARG BTRFS
 ARG ZFS
 
@@ -17,7 +17,7 @@ RUN URL=https://hndl.urbackup.org/Server/${VERSION} && \
          "linux/amd64")  URL=$URL/debian/${DEBIAN}/urbackup-server_${VERSION}_amd64.deb  ;; \
          "linux/arm64")  URL=$URL/urbackup-server_${VERSION}_arm64.deb  ;; \
          "linux/arm/v7") URL=$URL/urbackup-server_${VERSION}_armhf.deb  ;; \
-         "linux/386")    URL=$URL/debian/${DEBIAN}/urbackup-server_${VERSION}_i386.deb   ;; \
+         "linux/i386")   URL=$URL/debian/${DEBIAN}/urbackup-server_${VERSION}_i386.deb   ;; \
     esac \
     && dry="http://deb.debian.org/debian ${DEBIAN}-backports main contrib" \
     && echo "deb $dry\ndeb-src $dry" >/etc/apt/sources.list.d/${DEBIAN}-backports.list \
