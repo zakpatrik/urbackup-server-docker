@@ -24,6 +24,8 @@ docker run -d \
 
 For BTRFS-Support add `--cap-add SYS_ADMIN` to the command above
 
+For ZFS support add `--device /dev/zfs` to the command above
+
 If you want to externally bind-mount the www-folder add `-v /path/to/wwwfolder:/usr/share/urbackup`
 
 ### Or via docker-compose (compatible with stacks in Portainer): 
