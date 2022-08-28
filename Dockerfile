@@ -1,19 +1,19 @@
-# Base image can be specified by --build-arg IMAGE_ARCH= ; defaults to debian:buster
-ARG IMAGE_ARCH=debian:buster
+# Base image can be specified by --build-arg IMAGE_ARCH= ; defaults to debian:bullseye
+ARG IMAGE_ARCH=debian:bullseye
 FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG VERSION=2.4.15
+ARG VERSION=2.5.25
 ENV VERSION ${VERSION}
 ARG TARGETPLATFORM
 
 COPY entrypoint.sh /usr/bin/
 
 RUN case ${TARGETPLATFORM} in \
-         "linux/amd64")  URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_amd64.deb  ;; \
+         "linux/amd64")  URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_amd64.deb  ;; \
          "linux/arm64")  URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_arm64.deb  ;; \
          "linux/arm/v7") URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_armhf.deb  ;; \
-         "linux/386")    URL=https://hndl.urbackup.org/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_i386.deb   ;; \
+         "linux/386")    URL=https://hndl.urbackup.org/Server/${VERSION}/debian/bullseye/urbackup-server_${VERSION}_i386.deb   ;; \
     esac \
         && apt-get update \
         && apt-get install -y wget \
