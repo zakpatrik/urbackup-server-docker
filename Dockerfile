@@ -1,33 +1,41 @@
-# Base image can be specified by --build-arg IMAGE_ARCH= ; defaults to debian:bullseye
-ARG IMAGE_ARCH=debian:bullseye
-FROM ${IMAGE_ARCH}
+ARG DEBIAN=bullseye
+FROM debian:${DEBIAN}
 
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN=bullseye
 ARG VERSION=2.5.25
-ENV VERSION ${VERSION}
 ARG TARGETPLATFORM
+ARG BTRFS
+ARG ZFS
 
 COPY entrypoint.sh /usr/bin/
 
-RUN case ${TARGETPLATFORM} in \
-         "linux/amd64")  URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_amd64.deb  ;; \
-         "linux/arm64")  URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_arm64.deb  ;; \
-         "linux/arm/v7") URL=https://hndl.urbackup.org/Server/${VERSION}/urbackup-server_${VERSION}_armhf.deb  ;; \
-         "linux/386")    URL=https://hndl.urbackup.org/Server/${VERSION}/debian/bullseye/urbackup-server_${VERSION}_i386.deb   ;; \
+RUN URL=https://hndl.urbackup.org/Server/${VERSION} && \
+    case ${TARGETPLATFORM} in \
+         "linux/amd64")  URL=$URL/urbackup-server_${VERSION}_amd64.deb  ;; \
+         "linux/arm64")  URL=$URL/urbackup-server_${VERSION}_arm64.deb  ;; \
+         "linux/arm/v7") URL=$URL/urbackup-server_${VERSION}_armhf.deb  ;; \
+         "linux/i386")   URL=$URL/debian/${DEBIAN}/urbackup-server_${VERSION}_i386.deb   ;; \
     esac \
-        && apt-get update \
-        && apt-get install -y wget \
-        && wget -q "$URL" -O /root/urbackup-server.deb \
-        && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
-        && apt-get install -y --no-install-recommends /root/urbackup-server.deb btrfs-tools \
-        && rm /root/urbackup-server.deb \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
-
-# Backing up www-folder
-RUN mkdir /web-backup && cp -R /usr/share/urbackup/* /web-backup
-# Making entrypoint-script executable
-RUN chmod +x /usr/bin/entrypoint.sh
+    && dry="http://deb.debian.org/debian ${DEBIAN}-backports main contrib" \
+    && echo "deb $dry\ndeb-src $dry" >/etc/apt/sources.list.d/${DEBIAN}-backports.list \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get install -y wget \
+    && wget -q "$URL" -O /root/urbackup-server.deb \
+    && apt-get remove -y wget \
+    && apt-get autoremove -y \
+    && echo "urbackup-server urbackup/backuppath string /backups" \
+            | debconf-set-selections \
+    && apt-get install -y --no-install-recommends \
+            /root/urbackup-server.deb \
+            ${BTRFS:+btrfs-progs} \
+            ${ZFS:+zfsutils-linux} \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+            /etc/apt/sources.list.d/${DEBIAN}-backports.list \
+            /root/urbackup-server.deb \
+    && cp -R /usr/share/urbackup /web-backup \
+    && chmod +x /usr/bin/entrypoint.sh
 
 EXPOSE 55413
 EXPOSE 55414
