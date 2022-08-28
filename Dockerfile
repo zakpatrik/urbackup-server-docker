@@ -2,7 +2,7 @@ ARG DEBIAN=bullseye
 FROM debian:${DEBIAN}
 
 ARG DEBIAN=bullseye
-ARG VERSION=2.4.15
+ARG VERSION=2.5.25
 ARG TARGETPLATFORM
 ARG BTRFS
 ARG ZFS
@@ -11,10 +11,10 @@ COPY entrypoint.sh /usr/bin/
 
 RUN URL=https://hndl.urbackup.org/Server/${VERSION} && \
     case ${TARGETPLATFORM} in \
-         "linux/amd64")  URL=$URL/debian/${DEBIAN}/urbackup-server_${VERSION}_amd64.deb  ;; \
+         "linux/amd64")  URL=$URL/urbackup-server_${VERSION}_amd64.deb  ;; \
          "linux/arm64")  URL=$URL/urbackup-server_${VERSION}_arm64.deb  ;; \
          "linux/arm/v7") URL=$URL/urbackup-server_${VERSION}_armhf.deb  ;; \
-         "linux/i386")   URL=$URL/debian/${DEBIAN}/urbackup-server_${VERSION}_i386.deb   ;; \
+         "linux/386" | "linux/i386")   URL=$URL/debian/${DEBIAN}/urbackup-server_${VERSION}_i386.deb   ;; \
     esac \
     && dry="http://deb.debian.org/debian ${DEBIAN}-backports main contrib" \
     && echo "deb $dry\ndeb-src $dry" >/etc/apt/sources.list.d/${DEBIAN}-backports.list \
