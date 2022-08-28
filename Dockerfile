@@ -21,7 +21,7 @@ RUN URL=https://hndl.urbackup.org/Server/${VERSION} && \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install -y wget \
-    && wget -q "$URL" -O /root/urbackup-server.deb \
+    && wget "$URL" -O /root/urbackup-server.deb \
     && apt-get remove -y wget \
     && apt-get autoremove -y \
     && echo "urbackup-server urbackup/backuppath string /backups" \
