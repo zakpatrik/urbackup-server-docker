@@ -39,4 +39,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/i386,linux/armhf
           push: true
+          build-args: |
+            BTRFS=1
           tags: uroni/urbackup-server:${{ steps.extract_branch.outputs.branch }}
