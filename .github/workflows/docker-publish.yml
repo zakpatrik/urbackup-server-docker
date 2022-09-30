@@ -33,6 +33,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
+        name: Update DockerHub description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: uroni/urbackup-server
+          short-description: ${{ github.event.repository.description }}
+      -
         name: Build and push baseline with btrfs support
         uses: docker/build-push-action@v3
         with:
