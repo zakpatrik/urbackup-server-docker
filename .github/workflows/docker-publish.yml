@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push
+        name: Build and push baseline with btrfs support
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -41,4 +41,17 @@ jobs:
           push: true
           build-args: |
             BTRFS=1
-          tags: uroni/urbackup-server:${{ steps.extract_branch.outputs.branch }}
+          tags:
+            - uroni/urbackup-server:${{ steps.extract_branch.outputs.branch }}-btrfs
+            - uroni/urbackup-server:${{ steps.extract_branch.outputs.branch }}
+      -
+        name: Build and push ZFS variant
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          build-args: |
+            ZFS=1
+          tags:
+            - uroni/urbackup-server:${{ steps.extract_branch.outputs.branch }}-zfs
