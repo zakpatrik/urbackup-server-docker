@@ -49,9 +49,12 @@ services:
       # Uncomment the next line if you want to bind-mount the www-folder
       #- /path/to/wwwfolder:/usr/share/urbackup
     network_mode: "host"
-    # Activate the following two lines for BTRFS support
+    # Uncomment the following two lines if you're using BTRFS support
     #cap_add:
-    #  - SYS_ADMIN   
+    #  - SYS_ADMIN
+    # Uncomment the following two lines if you're using ZFS support
+    #devices:
+    #  - /dev/zfs:/dev/zfs
   
 ```              
 	     
